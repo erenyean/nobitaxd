@@ -1,6 +1,7 @@
 {
-  "name": "myytapi",
+  "name": "nobitaxd",
   "version": "1.0.0",
+  "description": "Simple YouTube downloader API using yt-dlp",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -8,6 +9,19 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "yt-dlp-exec": "^2.1.1"
-  }
+    "yt-dlp-exec": "2.0.3",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "keywords": [
+    "youtube",
+    "api",
+    "yt-dlp",
+    "audio",
+    "downloader"
+  ],
+  "author": "NobitaXD",
+  "license": "MIT"
 }
