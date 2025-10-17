@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "yt-dlp-exec": "2.0.3",
+    "yt-dlp-exec": "^1.4.0",
     "cors": "^2.8.5"
   },
   "engines": {
