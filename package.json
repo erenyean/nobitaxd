@@ -1,13 +1,15 @@
 {
   "name": "nobitaxd",
   "version": "1.0.0",
+  "description": "YouTube downloader API",
   "main": "server.js",
-  "engines": { "node": "22.x" },
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "yt-dlp-exec": "^1.3.0"
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": "22.x"
   }
 }
