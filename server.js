@@ -1,45 +1,23 @@
 import express from "express";
 import { exec } from "child_process";
-import util from "util";
-import fs from "fs";
 
 const app = express();
-const execPromise = util.promisify(exec);
+const PORT = process.env.PORT || 3000;
 
-// If cookies stored in environment variable, write them to file
-if (process.env.COOKIES) {
-  fs.writeFileSync("cookies.txt", process.env.COOKIES);
-}
+app.get("/downloader/youtube/play/v1", (req, res) => {
+  const url = req.query.q;
+  if (!url) return res.json({ success: false, message: "No URL provided" });
 
-app.get("/downloader/youtube/play/v1", async (req, res) => {
-  const q = req.query.q;
-  if (!q) return res.json({ success: false, message: "Missing query" });
-
-  try {
-    const { stdout } = await execPromise(
-      `yt-dlp -j --cookies cookies.txt "${q}"`
-    );
-    const info = JSON.parse(stdout);
-
-    const audio = info.formats.find(f => f.asr);
-    res.json({
-      success: true,
-      result: {
-        metadata: {
-          title: info.title,
-          channel: info.channel,
-          duration: info.duration,
-          cover: info.thumbnail,
-          url: info.webpage_url
-        },
-        downloadUrl: audio?.url
-      },
-      timestamp: new Date().toISOString()
-    });
-  } catch (e) {
-    res.json({ success: false, message: "Failed to fetch video" });
-  }
+  // Using Python yt-dlp
+  exec(`yt-dlp -j "${url}"`, (err, stdout, stderr) => {
+    if (err) return res.json({ success: false, message: stderr });
+    try {
+      const data = JSON.parse(stdout);
+      res.json({ success: true, result: data });
+    } catch (e) {
+      res.json({ success: false, message: "Failed to parse video info" });
+    }
+  });
 });
 
-app.listen(3000, () => console.log("✅ API running on port 3000"));
-export default app;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
