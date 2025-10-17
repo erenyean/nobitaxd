@@ -1,7 +1,7 @@
 {
   "name": "nobitaxd",
   "version": "1.0.0",
-  "description": "Simple YouTube downloader API using yt-dlp",
+  "description": "YouTube API using yt-dlp via youtube-dl-exec wrapper",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -9,19 +9,11 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "yt-dlp-exec": "^1.4.0",
+    "youtube-dl-exec": "^3.0.0",  // or whatever latest version
     "cors": "^2.8.5"
   },
   "engines": {
     "node": "22.x"
   },
-  "keywords": [
-    "youtube",
-    "api",
-    "yt-dlp",
-    "audio",
-    "downloader"
-  ],
-  "author": "NobitaXD",
   "license": "MIT"
 }
